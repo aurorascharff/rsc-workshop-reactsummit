@@ -8,10 +8,10 @@ export async function updateContact(contactId: string, formData: FormData) {
   const data = Object.fromEntries(formData);
   const result = contactSchema.parse(data);
 
-  await prisma.contact.update({
+  const contact = await prisma.contact.update({
     data: result,
     where: { id: contactId },
   });
 
-  redirect(`/contacts/${contactId}`);
+  redirect(`/contacts/${contact.id}`);
 }
