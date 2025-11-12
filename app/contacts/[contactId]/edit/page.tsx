@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import ContactForm from './_components/ContactForm';
 
 type PageProps = {
@@ -8,5 +9,12 @@ type PageProps = {
 
 export default async function EditContactPage({ params }: PageProps) {
   const contactId = (await params).contactId;
-  return <ContactForm contactId={contactId} />;
+  return (
+    <div>
+      Static content
+      <Suspense fallback={<div>Loading form...</div>}>
+        <ContactForm contactId={contactId} />
+      </Suspense>
+    </div>
+  );
 }
